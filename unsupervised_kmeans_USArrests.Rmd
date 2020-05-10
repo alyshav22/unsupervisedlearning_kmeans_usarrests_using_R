@@ -1,0 +1,59 @@
+## Unsupervised Learning - K-means
+#### By Alysha Velasquez
+<br>
+
+This project uses the USArrests dataset, which includes contains the number of arrests for murder, assault, and rape for each of the 50 states in 1973. It also contains the percentage of people in the state who live in an urban area.
+
+Installing and loading required packages:
+```{r}
+library("cluster") ##for computing clustering
+library("factoextra") ##for ggplot2-based data visualization
+
+```
+
+Data prep:
+```{r}
+# Load data
+data("USArrests")
+my_data <- USArrests
+
+# Remove any missing value 
+my_data <- na.omit(my_data)
+
+# Scale variables
+my_data <- scale(my_data)
+
+# View the firt 5 rows
+head(my_data, n = 5)
+
+```
+
+
+Clarifying distance measures:
+```{r}
+#Computing a distance matrix between the rows of a data matrix
+res.dist <- get_dist(USArrests, stand = TRUE, method = "pearson")
+
+
+#Visualizing a distance matrix
+fviz_dist(res.dist, 
+   gradient = list(low = "#00AFBB", mid = "white", high = "#FC4E07"))
+
+```
+
+Partitioning clustering:
+```{r}
+library("factoextra")
+fviz_nbclust(my_data, kmeans, method = "gap_stat")
+
+#compute and visualize k-means clustering
+km.res <- kmeans(my_data, 3, nstart = 25)
+
+# Visualize
+library("factoextra")
+fviz_cluster(km.res, data = my_data, frame.type = "convex")+
+  theme_minimal()
+
+```
+
+

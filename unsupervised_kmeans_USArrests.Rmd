@@ -1,5 +1,5 @@
 ## Unsupervised Learning - K-means
-#### By Alysha Velasquez
+
 <br>
 
 This project uses the USArrests dataset, which includes contains the number of arrests for murder, assault, and rape for each of the 50 states in 1973. It also contains the percentage of people in the state who live in an urban area.
